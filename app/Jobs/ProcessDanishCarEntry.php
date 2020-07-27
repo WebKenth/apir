@@ -85,7 +85,8 @@ class ProcessDanishCarEntry implements ShouldQueue
         $vehicle->oid = $data['id'];
         $vehicle->plate = $data['registration_number'];
         $vehicle->registration_status = $data['registration_status'];
-        $vehicle->registration_date = Carbon::createFromTimeString($data['registration_status_date']);
+        $registration_date = $data['registration_status_date'];
+        $vehicle->registration_date = $registration_date ? Carbon::createFromTimeString($registration_date) : '';
         $vehicle->type = $data['type_name'];
         $vehicle->usage = $data['usage_name'];
         $vehicle->vin = $data['vehicle_vin'];
@@ -93,7 +94,8 @@ class ProcessDanishCarEntry implements ShouldQueue
         $vehicle->brand = $data['vehicle_brand'];
         $vehicle->engine = $data['vehicle_engine'];
         $vehicle->fuel_type = $data['vehicle_fuel_type'];
-        $vehicle->inspection_date = Carbon::createFromTimeString($data['inspection_date']);
+        $inspection_date = $data['inspection_date'];
+        $vehicle->inspection_date = $inspection_date ? Carbon::createFromTimeString($inspection_date) : '';
         $vehicle->inspection_status = $data['inspection_status'];
 
         try{
