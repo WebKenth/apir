@@ -19,7 +19,7 @@ class ConsumeDanishXML extends Command
      *
      * @var string
      */
-    protected $description = 'Processes an XML file and sends it to MeiliSearch';
+    protected $description = 'Processes an XML file and creates jobs for Processing Danish Car Entries';
 
     /**
      * Create a new command instance.

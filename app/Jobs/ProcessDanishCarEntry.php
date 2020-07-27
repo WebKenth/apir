@@ -75,7 +75,10 @@ class ProcessDanishCarEntry implements ShouldQueue
             $data[$key] = $payload->pluck($lookup)->first();
         }
 
-        $vehicle = new Vehicle();
+
+        $vehicle = Vehicle::firstOrNew([
+            'oid' => $data['id']
+        ]);
 
         $vehicle->raw = $this->payload;
         $vehicle->raw_dot = $this->arrayToDotNotation($this->payload);
@@ -92,10 +95,10 @@ class ProcessDanishCarEntry implements ShouldQueue
         $vehicle->fuel_type = $data['vehicle_fuel_type'];
         $vehicle->inspection_date = Carbon::createFromTimeString($data['inspection_date']);
         $vehicle->inspection_status = $data['inspection_status'];
+
         try{
             $vehicle->save();
         }catch (\Throwable $t){
-            dump($t->getMessage());
             $this->log($t->getMessage(),'error');
         }
 
@@ -118,26 +121,20 @@ class ProcessDanishCarEntry implements ShouldQueue
 
     public function log($message, $type = 'info', array $data = [])
     {
-        dump($message);
-        try{
-            switch ($type) {
-                case 'info':
-                    Log::info('Job [' . $this->job->getJobId() . '] ' . $message, $data);
-                    break;
-                case 'error':
-                    Log::error('Job [' . $this->job->getJobId() . '] ' . $message, $data);
-                    break;
-                default:
-                    Log::debug('Job [' . $this->job->getJobId() . '] ' . $message, $data);
-            }
-        }catch (\Throwable $t){
-            dd($t->getMessage());
+        switch ($type) {
+            case 'info':
+                Log::info('Job [' . $this->job->getJobId() . '] ' . $message, $data);
+                break;
+            case 'error':
+                Log::error('Job [' . $this->job->getJobId() . '] ' . $message, $data);
+                break;
+            default:
+                Log::debug('Job [' . $this->job->getJobId() . '] ' . $message, $data);
         }
     }
 
     public function failed(\Exception $e)
     {
-        dump($e->getMessage());
         $this->log($e->getMessage(), 'error', [
             'code' => $e->getCode(),
             'message' => $e->getMessage(),
