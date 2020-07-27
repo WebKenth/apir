@@ -65,7 +65,7 @@ class ProcessDanishCarEntry implements ShouldQueue
      */
     public function handle()
     {
-        $plate = $this->payload['RegistreringNummerNummer'];
+        $plate = $this->payload['RegistreringNummerNummer'] ?? 'N/a';
 
         $this->log('Processing Entry ' . $plate);
 
