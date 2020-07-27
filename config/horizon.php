@@ -170,7 +170,7 @@ return [
                 'connection' => 'database',
                 'queue' => ['default'],
                 'balance' => 'simple',
-                'processes' => 10,
+                'processes' => 3,
                 'tries' => 1,
             ],
         ],
