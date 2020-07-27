@@ -121,15 +121,21 @@ class ProcessDanishCarEntry implements ShouldQueue
 
     public function log($message, $type = 'info', array $data = [])
     {
+        $job = $this->job;
+        $jobId = 0;
+        if($job !== null)
+        {
+            $jobId = $job->getJobId();
+        }
         switch ($type) {
             case 'info':
-                Log::info('Job [' . $this->job->getJobId() . '] ' . $message, $data);
+                Log::info('Job [' . $jobId . '] ' . $message, $data);
                 break;
             case 'error':
-                Log::error('Job [' . $this->job->getJobId() . '] ' . $message, $data);
+                Log::error('Job [' . $jobId . '] ' . $message, $data);
                 break;
             default:
-                Log::debug('Job [' . $this->job->getJobId() . '] ' . $message, $data);
+                Log::debug('Job [' . $jobId . '] ' . $message, $data);
         }
     }
 
