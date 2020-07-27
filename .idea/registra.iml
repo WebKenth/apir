@@ -31,6 +31,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/hamcrest/hamcrest-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/http-interop/http-factory-guzzle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/horizon" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/nova" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/ui" />
