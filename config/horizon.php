@@ -167,7 +167,7 @@ return [
     'environments' => [
         'production' => [
             'supervisor-1' => [
-                'connection' => 'database',
+                'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'simple',
                 'processes' => 3,
@@ -177,7 +177,7 @@ return [
 
         'local' => [
             'supervisor-1' => [
-                'connection' => 'database',
+                'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'simple',
                 'processes' => 3,
