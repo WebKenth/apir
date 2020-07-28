@@ -15,21 +15,21 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('oid')->index();
-            $table->string('plate')->index();
-            $table->string('registration_status');
+            $table->string('oid')->index()->nullable();
+            $table->string('plate')->index()->nullable();
+            $table->string('registration_status')->nullable();
             $table->dateTime('registration_date');
-            $table->string('type');
-            $table->string('usage');
-            $table->string('vin');
-            $table->string('model');
-            $table->string('brand');
-            $table->string('engine');
-            $table->string('fuel_type');
-            $table->string('inspection_status');
+            $table->string('type')->nullable();
+            $table->string('usage')->nullable();
+            $table->string('vin')->nullable();
+            $table->string('model')->nullable();
+            $table->string('brand')->nullable();
+            $table->string('engine')->nullable();
+            $table->string('fuel_type')->nullable();
+            $table->string('inspection_status')->nullable();
             $table->dateTime('inspection_date');
-            $table->jsonb('raw');
-            $table->jsonb('raw_dot');
+            $table->jsonb('raw')->nullable();
+            $table->jsonb('raw_dot')->nullable();
             $table->timestamps();
         });
     }
