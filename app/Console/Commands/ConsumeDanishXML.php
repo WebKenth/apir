@@ -57,7 +57,7 @@ class ConsumeDanishXML extends Command
             $data = $this->processDom($dom);
 
             ProcessDanishCarEntry::dispatch($data);
-            usleep(50000);
+            usleep(10000);
 
             $reader->next($dom->localName);
         }
