@@ -98,11 +98,7 @@ class ProcessDanishCarEntry implements ShouldQueue
         $vehicle->inspection_date = $inspection_date ? Carbon::createFromTimeString($inspection_date) : Carbon::createFromTimestamp(0);
         $vehicle->inspection_status = $data['inspection_status'];
 
-        try{
-            $vehicle->save();
-        }catch (\Throwable $t){
-            $this->log($t->getMessage(),'error');
-        }
+        $vehicle->save();
 
         $this->log('Processed: ' . $plate);
     }
