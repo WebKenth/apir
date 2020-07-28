@@ -170,7 +170,7 @@ return [
                 'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'simple',
-                'processes' => 2,
+                'processes' => 4,
                 'tries' => 1,
             ],
         ],
