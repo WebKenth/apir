@@ -56,11 +56,26 @@ class ConsumeDanishXML extends Command
             $bar->advance();
             $data = $this->processDom($dom);
 
-            ProcessDanishCarEntry::dispatch($data);
+            $this->dispatchJob($data);
 
             $reader->next($dom->localName);
         }
         $bar->finish();
+    }
+
+    public function dispatchJob($data, $level = 0)
+    {
+        try {
+            ProcessDanishCarEntry::dispatch($data);
+        } catch (\Throwable $t) {
+            dump($t->getMessage());
+            Log::error('ConsumeDanishXML :: ' . $t->getMessage());
+            sleep(5);
+            if ($level === 20) {
+                dd($t->getMessage());
+            }
+            $this->dispatchJob($data, $level + 1);
+        }
     }
 
     public function processDom(\DOMNode $node)
