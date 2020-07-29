@@ -81,7 +81,6 @@ class ProcessDanishCarEntry implements ShouldQueue
         ]);
 
         $vehicle->raw = $this->payload;
-        $vehicle->raw_dot = $this->arrayToDotNotation($this->payload);
         $vehicle->oid = $data['id'];
         $vehicle->plate = $data['registration_number'];
         $vehicle->registration_status = $data['registration_status'];
