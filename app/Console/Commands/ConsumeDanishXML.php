@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Jobs\ProcessDanishCarEntry;
+use Illuminate\Support\Facades\Log;
 
 class ConsumeDanishXML extends Command
 {
