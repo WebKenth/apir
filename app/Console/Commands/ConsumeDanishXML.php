@@ -58,6 +58,7 @@ class ConsumeDanishXML extends Command
             $data = $this->processDom($dom);
 
             $this->dispatchJob($data);
+            usleep(1000);
 
             $reader->next($dom->localName);
         }
