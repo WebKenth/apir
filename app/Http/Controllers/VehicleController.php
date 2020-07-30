@@ -17,6 +17,14 @@ class VehicleController extends Controller
         //
     }
 
+    public function plate($plate)
+    {
+        $vehicle =  Vehicle::where('plate', $plate)->first();
+        if(!$vehicle)
+            return response('Vehicle not found',404);
+        return $vehicle;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +38,7 @@ class VehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +49,7 @@ class VehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Vehicle  $vehicle
+     * @param  \App\Vehicle $vehicle
      * @return \Illuminate\Http\Response
      */
     public function show(Vehicle $vehicle)
@@ -52,7 +60,7 @@ class VehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vehicle  $vehicle
+     * @param  \App\Vehicle $vehicle
      * @return \Illuminate\Http\Response
      */
     public function edit(Vehicle $vehicle)
@@ -63,8 +71,8 @@ class VehicleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vehicle  $vehicle
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Vehicle $vehicle
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Vehicle $vehicle)
@@ -75,7 +83,7 @@ class VehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vehicle  $vehicle
+     * @param  \App\Vehicle $vehicle
      * @return \Illuminate\Http\Response
      */
     public function destroy(Vehicle $vehicle)
