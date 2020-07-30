@@ -25,6 +25,14 @@ class VehicleController extends Controller
         return $vehicle;
     }
 
+    public function vin($vin)
+    {
+        $vehicle =  Vehicle::where('vin', $vin)->first();
+        if(!$vehicle)
+            return response('Vehicle not found',404);
+        return $vehicle;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
