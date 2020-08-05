@@ -58,7 +58,6 @@ class ConsumeDanishXML extends Command
             $data = $this->processDom($dom);
 
             $this->dispatchJob($data);
-            usleep(1000);
 
             $reader->next($dom->localName);
         }
@@ -70,12 +69,12 @@ class ConsumeDanishXML extends Command
         try {
             ProcessDanishCarEntry::dispatch($data);
         } catch (\Throwable $t) {
+            // This process adds ALOT of jobs into the redis queue which can quickly fill up available memory
+            // if a crash happens we catch the error here and wait for it to catch up
+            // the redis service will gracefully recover and block requests until it is ready again, why the 60 second sleep
             dump($t->getMessage());
             Log::error('ConsumeDanishXML :: ' . $t->getMessage());
-            sleep(5);
-            if ($level === 20) {
-                dd($t->getMessage());
-            }
+            sleep(60); // sleep for a minute until Redis can recover itself from memory crash
             $this->dispatchJob($data, $level + 1);
         }
     }
